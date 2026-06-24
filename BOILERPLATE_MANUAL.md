@@ -31,8 +31,6 @@ Contas necessárias (crie antes de começar):
 - [Vercel](https://vercel.com) — hosting (login com GitHub)
 - [Neon](https://neon.tech) — banco PostgreSQL
 - [Google Cloud Console](https://console.cloud.google.com) — OAuth
-- [Resend](https://resend.com) — envio de emails
-- [Stripe](https://dashboard.stripe.com) — pagamentos
 
 ---
 
@@ -62,12 +60,6 @@ Crie o `prisma/schema.prisma` com as entidades obrigatórias:
 - Middleware protegendo rotas `/dashboard/*`, `/app/*`, `/settings/*`
 - Página customizada `/login`
 
-### ETAPA 3 — TRIAL E ASSINATURA
-Funções em `lib/subscription.ts`:
-- `isTrialActive(user)` — trialEndsAt > now E plan === TRIAL
-- `isSubscribed(user)` — plan === PRO E stripeCurrentPeriodEnd > now
-- `hasAccess(user)` — isTrialActive OR isSubscribed
-- `daysLeftInTrial(user)` — dias restantes
 
 Fluxo:
 1. Primeiro login → TRIAL 14 dias
@@ -89,16 +81,6 @@ Fluxo:
   - `customer.subscription.deleted` → volta para FREE
 - Após upgrade, o Stripe Customer Portal permite gerenciar/cancelar via `createCustomerPortalSession()`
 
-### ETAPA 4 — PAYWALL E LIMITES
-- Constante `PLAN_LIMITS` com limites por plano
-- Função `checkUsageLimit(user, resource)`
-- Componente `<PaywallGate>` que bloqueia com card bonito + CTA upgrade
-
-### ETAPA 5 — STRIPE (PAGAMENTOS)
-- Checkout Session (subscription + trial)
-- Customer Portal
-- Webhook: `checkout.session.completed`, `invoice.payment_succeeded`, `customer.subscription.deleted/updated`
-- Página `/settings/billing`
 
 ### ETAPA 6 — FEATURES DO PRODUTO
 Implementar as features descritas em [MEU PRODUTO] com:
