@@ -1,0 +1,34 @@
+<svg width="195" height="195" viewBox="0 0 195 195" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="web-page-auto-layout">
+<g id="Frame 41" clip-path="url(#clip0_0_1)">
+<g id="Frame 5">
+<g id="Group 6973">
+<g id="Group 6538">
+<g id="Ellipse 20" filter="url(#filter0_d_0_1)">
+<circle cx="97.4279" cy="95.4279" r="72.4279" fill="white"/>
+</g>
+<g id="Uber">
+<circle id="Ellipse 38" cx="97.078" cy="95.078" r="40.869" fill="#F5F5F5"/>
+<path id="Vector" d="M97.0409 54.209C75.2781 54.209 57.4854 71.1893 56.209 92.6123H83.7236V84.4831C83.7236 83.304 84.6804 82.3481 85.8606 82.3481H107.559C108.739 82.3481 109.696 83.304 109.696 84.4831V106.162C109.696 107.341 108.739 108.297 107.559 108.297H85.8606C84.6804 108.297 83.7236 107.341 83.7236 106.162V97.8163H56.2256C57.6362 119.111 75.3705 135.947 97.0409 135.947C119.632 135.947 137.947 117.649 137.947 95.078C137.947 72.507 119.633 54.209 97.0409 54.209Z" fill="#010101"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_0_1" x="0" y="0" width="194.855" height="194.856" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="2"/>
+<feGaussianBlur stdDeviation="12.5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_1" result="shape"/>
+</filter>
+<clipPath id="clip0_0_1">
+<rect width="1920" height="554" fill="white" transform="translate(-470.947 -300.764)"/>
+</clipPath>
+</defs>
+</svg>

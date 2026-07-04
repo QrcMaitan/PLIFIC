@@ -8,6 +8,10 @@
   --color-accent: #eec03f;
   --color-accent-ink: #1a1816;
   --color-line: #e7e2d8;
+  --color-night: #0b0e11;
+  --color-night-card: #181a20;
+  --color-night-muted: #707a8a;
+  --color-night-accent: #fcd535;
 }
 
 @theme inline {
@@ -18,12 +22,28 @@
   --color-accent: var(--color-accent);
   --color-accent-ink: var(--color-accent-ink);
   --color-line: var(--color-line);
+  --color-night: var(--color-night);
+  --color-night-card: var(--color-night-card);
+  --color-night-muted: var(--color-night-muted);
+  --color-night-accent: var(--color-night-accent);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 120px;
+}
+
+/* Lenis drives scrolling itself once active — native smooth-scroll would
+   otherwise fight its animation loop. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
 body {
@@ -54,4 +74,19 @@ body {
   .animate-marquee {
     animation: none;
   }
+}
+
+/* Links carry their own default pointer cursor, but browsers default
+   <button> to cursor:default — restore the pointer so every clickable
+   control looks clickable. */
+button:not(:disabled),
+[role="button"]:not(:disabled) {
+  cursor: pointer;
+}
+
+/* Links/buttons carry their own default cursor (pointer) that would
+   otherwise win over the inherited cursor:none set on body. */
+body.cursor-none,
+body.cursor-none * {
+  cursor: none !important;
 }
