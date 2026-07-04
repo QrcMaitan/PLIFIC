@@ -21,17 +21,23 @@ export function TrendChart({
   data,
   activeIndex,
   breakdownByIndex,
+  scaleMax,
 }: {
   data: TrendPoint[];
   activeIndex: number;
   breakdownByIndex?: TrendBreakdownItem[][];
+  /** Fixed reference ceiling for the y-axis, independent of `data`'s own
+   * values — without it, scaling every bar down by the same ratio (e.g.
+   * when filtering platforms) leaves the chart looking unchanged, since
+   * each bar's height is only ever relative to the tallest one. */
+  scaleMax?: number;
 }) {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const width = 700;
   const height = 160;
   const padding = 16;
   const totalHeight = height + 22;
-  const max = Math.max(...data.map((d) => d.value), 1);
+  const max = Math.max(scaleMax ?? 0, ...data.map((d) => d.value), 1);
   const stepX = (width - padding * 2) / (data.length - 1);
   const barWidth = stepX * 0.4;
 

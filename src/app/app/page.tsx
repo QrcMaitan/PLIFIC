@@ -77,20 +77,40 @@ export default function AppHomePage() {
 
   const headlineAmount = tab === "ganhos" ? monthEarnings : advancedTotal;
 
+  // Historical months only have a combined total on record (no per-account
+  // split), so when platforms are deselected we scale that total down by
+  // how much of this month's earnings the selected accounts represent.
+  const totalWeeklyEarnings = useMemo(
+    () => accounts.reduce((sum, account) => sum + account.weeklyEarnings, 0),
+    [accounts],
+  );
+  const selectedShare =
+    totalWeeklyEarnings > 0 ? monthEarnings / totalWeeklyEarnings : 0;
+
   const chartData = useMemo(
     () =>
       MONTH_LABELS.map((label, index) => {
         const history = tab === "ganhos" ? EARNINGS_HISTORY : ADVANCES_HISTORY;
-        const value =
-          index < history.length
-            ? history[index]
-            : tab === "ganhos"
-              ? monthEarnings
-              : advancedTotal;
+        const isCurrentMonth = index >= history.length;
+        const value = isCurrentMonth
+          ? tab === "ganhos"
+            ? monthEarnings
+            : advancedTotal
+          : tab === "ganhos"
+            ? Math.round(history[index] * selectedShare)
+            : history[index];
         return { label, value };
       }),
-    [tab, monthEarnings, advancedTotal],
+    [tab, monthEarnings, advancedTotal, selectedShare],
   );
+
+  // Keeps the chart's y-axis anchored to the fully-connected scenario, so
+  // deselecting a platform visibly shrinks every bar instead of just
+  // rescaling them all by the same ratio (which cancels out visually).
+  const chartScaleMax =
+    tab === "ganhos"
+      ? Math.max(...EARNINGS_HISTORY, totalWeeklyEarnings, 1)
+      : Math.max(...ADVANCES_HISTORY, advancedTotal, 1);
 
   const percentAdvanced =
     totalConnected > 0
@@ -247,6 +267,7 @@ export default function AppHomePage() {
                   data={chartData}
                   activeIndex={chartData.length - 1}
                   breakdownByIndex={breakdownByIndex}
+                  scaleMax={chartScaleMax}
                 />
               </div>
             </div>
